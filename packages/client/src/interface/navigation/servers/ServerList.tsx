@@ -167,7 +167,7 @@ export const ServerList = (props: Props) => {
           </a>
           <UserMenu anchor={menuButton} />
         </Tooltip>
-        <Show when={!window.native}>
+        <Show when={!window.native && CONFIGURATION.IS_STOAT}>
           <Tooltip placement="right" content="Switch back to legacy app">
             <a href="https://app.revolt.chat" class={entryContainer()}>
               <Symbol>history</Symbol>
