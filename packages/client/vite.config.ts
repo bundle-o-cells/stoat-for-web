@@ -12,6 +12,7 @@ import solidSvg from "vite-plugin-solid-svg";
 import codegenPlugin from "./codegen.plugin";
 
 const base = process.env.BASE_PATH ?? "/";
+const appName = process.env.VITE_APP_NAME || "Stoat";
 
 export default defineConfig({
   base,
@@ -25,6 +26,15 @@ export default defineConfig({
     solidSvg({
       defaultAsComponent: false,
     }),
+        {
+      name: 'html-transform',
+      transformIndexHtml(html) {
+        return html.replace(
+          /<title>(.*?)<\/title>/,
+          `<title>${appName}</title>`
+        );
+      },
+    },
     VitePWA({
       srcDir: "src",
       registerType: "autoUpdate",
