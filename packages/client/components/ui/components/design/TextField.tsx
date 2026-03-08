@@ -2,6 +2,7 @@ import type { JSX } from "solid-js";
 
 import "mdui/components/select.js";
 import "mdui/components/text-field.js";
+import { cva } from "styled-system/css";
 
 type Props = JSX.HTMLAttributes<HTMLInputElement> & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,6 +29,10 @@ type Props = JSX.HTMLAttributes<HTMLInputElement> & {
     | "find";
 };
 
+const field = cva({
+  base: { cursor: "text" },
+});
+
 /**
  * Text fields let users enter text into a UI
  *
@@ -38,6 +43,7 @@ export function TextField(props: Props) {
   return (
     <mdui-text-field
       {...props}
+      class={field()}
       // @codegen directives props=props include=autoComplete
     />
   );
