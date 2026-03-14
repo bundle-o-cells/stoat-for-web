@@ -400,6 +400,7 @@ msgstr "Avatar"
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowCheck.tsx
+#: components/app/interface/settings/user/_AccountCard.tsx
 msgid "Back"
 msgstr ""
 
@@ -465,12 +466,17 @@ msgid "Bot"
 msgstr "robot"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "Browser"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Browser Echo Cancellation"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
-msgid "Browser Noise Supression"
-msgstr ""
+#~ msgid "Browser Noise Supression"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Bug Tracker"
@@ -1038,6 +1044,8 @@ msgstr "Lumpuhkan Akaun"
 msgid "Disable one-time password authenticator"
 msgstr ""
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/server/Overview.tsx
@@ -1171,8 +1179,8 @@ msgid "Emoji Name"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Emoji Pack (affects your messages only)"
-msgstr ""
+#~ msgid "Emoji Pack (affects your messages only)"
+#~ msgstr ""
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Emojis"
@@ -1192,6 +1200,14 @@ msgstr "Dayakan Pemberitahuan Desktop."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Enable transparency glass/blur effects (slow on older machines)"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "Enhanced"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "Enhanced (RNNoise)"
 msgstr ""
 
 #: components/modal/modals/RenameSession.tsx
@@ -1219,6 +1235,10 @@ msgstr "Masukkan kata laluan semasa anda."
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditEmail.tsx
 msgid "Enter your current password..."
+msgstr ""
+
+#: components/auth/src/flows/Form.tsx
+msgid "Enter your invite code."
 msgstr ""
 
 #: components/auth/src/flows/Form.tsx
@@ -1438,8 +1458,8 @@ msgid "Instead of closing, Stoat will hide in your tray."
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Interface Font"
-msgstr ""
+#~ msgid "Interface Font"
+#~ msgstr ""
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -1453,6 +1473,7 @@ msgstr "Jemput semua rakan anda, beberapa bot yang hebat, dan buat parti besar-b
 msgid "Invite Bot"
 msgstr ""
 
+#: components/auth/src/flows/Form.tsx
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Invite Code"
 msgstr "Kod Jemputan"
@@ -1779,8 +1800,8 @@ msgid "Monochrome"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Monospace Font"
-msgstr ""
+#~ msgid "Monospace Font"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
@@ -2062,6 +2083,10 @@ msgstr "Sila pilih kaedah untuk mengesahkan permintaan anda."
 msgid "Please select a reason"
 msgstr ""
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "Powered by RNNoise"
+msgstr ""
+
 #: components/auth/src/AuthPage.tsx
 msgid "Privacy Policy"
 msgstr "Dasar Privasi"
@@ -2090,6 +2115,7 @@ msgstr ""
 msgid "Raid or spam attack"
 msgstr ""
 
+#: components/app/menus/MessageContextMenu.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "React"
 msgstr ""
@@ -2347,6 +2373,10 @@ msgstr ""
 
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
+msgstr ""
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "Select noise suppression"
 msgstr ""
 
 #: components/app/interface/settings/user/Language.tsx
