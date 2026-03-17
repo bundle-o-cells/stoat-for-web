@@ -400,6 +400,7 @@ msgstr "Avatar"
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowCheck.tsx
+#: components/app/interface/settings/user/_AccountCard.tsx
 msgid "Back"
 msgstr "Back"
 
@@ -1178,8 +1179,8 @@ msgid "Emoji Name"
 msgstr "Emoji Name"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Emoji Pack (affects your messages only)"
-msgstr "Emoji Pack (affects your messages only)"
+#~ msgid "Emoji Pack (affects your messages only)"
+#~ msgstr "Emoji Pack (affects your messages only)"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Emojis"
@@ -1457,8 +1458,8 @@ msgid "Instead of closing, Stoat will hide in your tray."
 msgstr "Instead of closing, Stoat will hide in your tray."
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Interface Font"
-msgstr "Interface Font"
+#~ msgid "Interface Font"
+#~ msgstr "Interface Font"
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -1799,8 +1800,8 @@ msgid "Monochrome"
 msgstr "Monochrome"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-msgid "Monospace Font"
-msgstr "Monospace Font"
+#~ msgid "Monospace Font"
+#~ msgstr "Monospace Font"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
@@ -2114,6 +2115,7 @@ msgstr "Provided email or password is wrong."
 msgid "Raid or spam attack"
 msgstr "Raid or spam attack"
 
+#: components/app/menus/MessageContextMenu.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "React"
 msgstr "React"
