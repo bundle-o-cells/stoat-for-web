@@ -1,4 +1,4 @@
-import { Accessor, For, Show, createMemo } from "solid-js";
+import { For, Show, createMemo } from "solid-js";
 
 import { useLingui } from "@lingui-solid/solid/macro";
 import { API } from "stoat.js";
@@ -12,7 +12,8 @@ import { Row } from "@revolt/ui/components/layout";
 
 import MdAdd from "@material-design-icons/svg/outlined/add.svg?component-solid";
 
-import { MediaPickerProps } from "../composition/picker/CompositionMediaPicker";
+import { startsWithPackPUA } from "@revolt/markdown/emoji/UnicodeEmoji";
+import { CompositionMediaPicker } from "../composition";
 
 interface Props {
   /**
@@ -37,12 +38,16 @@ interface Props {
   addReaction(reaction: string): void;
 
   /**
+   * Send a GIF reaction
+   * @param text Message
+   */
+  sendGIF(text: string): void;
+
+  /**
    * Remove a reaction
    * @param reaction ID
    */
   removeReaction(reaction: string): void;
-
-  reactPicker: Accessor<MediaPickerProps | undefined>;
 }
 
 /**
@@ -88,8 +93,6 @@ export function Reactions(props: Props) {
       : required.length || optional.length;
   };
 
-  let reactRef;
-
   return (
     <Show when={hasReactions()}>
       <List>
@@ -118,15 +121,27 @@ export function Reactions(props: Props) {
             />
           )}
         </For>
-        <div
-          ref={reactRef}
-          onClick={(e) => props.reactPicker()?.onClickEmoji(e, reactRef)}
+        <CompositionMediaPicker
+          onMessage={props.sendGIF}
+          onTextReplacement={(emoji) =>
+            props.addReaction(
+              emoji.startsWith(":")
+                ? emoji.slice(1, emoji.length - 1)
+                : startsWithPackPUA(emoji)
+                  ? emoji.slice(1)
+                  : emoji,
+            )
+          }
         >
-          <AddReaction class="add">
-            <Ripple />
-            <MdAdd />
-          </AddReaction>
-        </div>
+          {(triggerProps) => (
+            <div ref={triggerProps.ref} onClick={triggerProps.onClickEmoji}>
+              <AddReaction class="add">
+                <Ripple />
+                <MdAdd />
+              </AddReaction>
+            </div>
+          )}
+        </CompositionMediaPicker>
       </List>
     </Show>
   );

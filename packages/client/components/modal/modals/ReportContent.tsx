@@ -9,9 +9,9 @@ import { Message } from "@revolt/app";
 import {
   Avatar,
   Column,
-  ControlSelect,
   Dialog,
   DialogProps,
+  FloatingSelect,
   Form2,
   Initials,
   MenuItem,
@@ -181,17 +181,25 @@ export function ReportContentModal(
             )}
           </div>
 
-          <ControlSelect
+          <FloatingSelect
             label={t`Reason for report`}
-            control={group.controls.category}
+            required
+            value={group.controls.category.value}
+            onChange={(
+              e: Event & { currentTarget: HTMLElement; target: Element },
+            ) =>
+              group.controls.category.setValue(
+                e.currentTarget.getAttribute("value") || "",
+              )
+            }
           >
-            <MenuItem>
+            <MenuItem value="">
               <Trans>Please select a reason</Trans>
             </MenuItem>
             <For each={reasons}>
               {(value) => <MenuItem value={value}>{strings[value]}</MenuItem>}
             </For>
-          </ControlSelect>
+          </FloatingSelect>
 
           {/* TODO: use TextEditor? */}
           <Form2.TextField

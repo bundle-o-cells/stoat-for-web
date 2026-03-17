@@ -155,26 +155,17 @@ const lineWrapStyles = EditorView.theme({
   ".cm-line.linewrap-indent": {
     // The tiny offset appears to make the indent more reliable,
     // for unknown reasons.
-    textIndent: "calc(-1 * var(--indented) - 0.1px)",
-    paddingLeft: "calc(var(--indented) + var(--cm-left-padding, 4px))",
+    "text-indent": "calc(-1 * var(--indented) - 0.1px)",
+    "padding-left": "calc(var(--indented) + var(--cm-left-padding, 4px))",
   },
   ".linewrap-whitespace": {
-    fontFamily: "monospace, monospace",
+    "font-family": "monospace, monospace",
     // Prevent slightly-oversided monospace fonts from changing line heights
     // when indented, but also changes the height of lines with only whitespace...
-    // fontSize: ".9em",
+    // "font-size": "0.9em",
   },
   ".cm-line > *": {
-    textIndent: 0,
-  },
-  ".cm-content": {
-    minWidth: 0,
-  },
-  ".cm-placeholder": {
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    width: "100%",
+    "text-indent": "0",
   },
 });
 

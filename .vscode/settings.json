@@ -20,11 +20,5 @@
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   // Nix environment settings
-  "nixEnvSelector.nixFile": "${workspaceFolder}/default.nix",
-  "search.exclude": {
-    "**/coverage": true,
-    "**/dist": true,
-    "**/i18n": true,
-    "**/styled-system": true
-  }
+  "nixEnvSelector.nixFile": "${workspaceFolder}/default.nix"
 }

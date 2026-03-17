@@ -1,4 +1,4 @@
-import { Accessor, JSX, Setter, Show } from "solid-js";
+import { Accessor, JSX, Show } from "solid-js";
 
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
@@ -19,33 +19,34 @@ export function SettingsContent(props: {
   list: Accessor<SettingsList<unknown>>;
   title: (ctx: SettingsList<never>, key: string) => string;
   page: Accessor<string | undefined>;
-  ref: Setter<HTMLDivElement | undefined>;
 }) {
   const { navigate } = useSettingsNavigation();
 
   return (
-    <div ref={props.ref} class="settings" use:scrollable={{ class: base() }}>
+    <div
+      use:scrollable={{
+        class: base(),
+      }}
+    >
       <Show when={props.page()}>
-        <InnerContent class="settings_cont">
+        <InnerContent>
           <InnerColumn>
-            <Show when={props.page() !== "account"}>
-              <Text class="title" size="large">
-                <Breadcrumbs
-                  elements={props.page()!.split("/")}
-                  renderElement={(key) =>
-                    props.title(props.list() as SettingsList<never>, key)
-                  }
-                  navigate={(keys) => navigate(keys.join("/"))}
-                />
-              </Text>
-            </Show>
+            <Text class="title" size="large">
+              <Breadcrumbs
+                elements={props.page()!.split("/")}
+                renderElement={(key) =>
+                  props.title(props.list() as SettingsList<never>, key)
+                }
+                navigate={(keys) => navigate(keys.join("/"))}
+              />
+            </Text>
             {props.children}
             <div class={css({ minHeight: "80px" })} />
           </InnerColumn>
         </InnerContent>
       </Show>
       <Show when={props.onClose}>
-        <CloseAction class="close">
+        <CloseAction>
           <IconButton variant="tonal" onPress={props.onClose}>
             <MdClose />
           </IconButton>
@@ -120,7 +121,7 @@ const CloseAction = styled("div", {
       marginTop: "4px",
       display: "flex",
       justifyContent: "center",
-      width: "40px",
+      width: "36px",
       fontWeight: 600,
       color: "var(--md-sys-color-on-surface)",
       fontSize: "0.75rem",

@@ -1,12 +1,10 @@
-import { createEffect, createSignal, on, onCleanup, Show } from "solid-js";
+import { Show } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Motion, Presence } from "solid-motionone";
 
 import { Settings, SettingsConfigurations } from "@revolt/app";
 import { DialogProps } from "@revolt/ui";
 
-import { useState } from "@revolt/state";
-import { SlideDrawer } from "@revolt/ui/components/navigation/SlideDrawer";
 import { Modals } from "../types";
 
 /**
@@ -15,24 +13,8 @@ import { Modals } from "../types";
 export function SettingsModal(
   props: DialogProps & Modals & { type: "settings" },
 ) {
-  const { setDiagDrawer } = useState();
   // eslint-disable-next-line solid/reactivity
   const config = SettingsConfigurations[props.config];
-
-  //Drawer slider for mobile
-  let rootRef, sDrawer: SlideDrawer | null;
-  const [contRef, setContRef] = createSignal<HTMLDivElement>();
-  createEffect(
-    on(contRef, (cont) => {
-      if (!cont || sDrawer) return;
-      sDrawer = new SlideDrawer(cont, rootRef!);
-      setDiagDrawer(sDrawer);
-    }),
-  );
-  onCleanup(() => {
-    sDrawer?.delete();
-    setDiagDrawer((sDrawer = null));
-  });
 
   return (
     <Portal mount={document.getElementById("floating")!}>
@@ -50,8 +32,13 @@ export function SettingsModal(
         <Presence>
           <Show when={props?.show}>
             <Motion.div
-              ref={rootRef}
-              class="settings_overlay"
+              style={{
+                height: "100%",
+                "pointer-events": "all",
+                display: "flex",
+                color: "var(--md-sys-color-on-surface)",
+                background: "var(--md-sys-color-surface-container-highest)",
+              }}
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.1 }}
@@ -66,7 +53,6 @@ export function SettingsModal(
                 title={config.title}
                 list={config.list}
                 context={props.context as never}
-                contentRef={setContRef}
               />
             </Motion.div>
           </Show>

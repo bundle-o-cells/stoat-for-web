@@ -20,28 +20,28 @@ import {
  */
 export function SettingsSidebar(props: {
   list: Accessor<SettingsList<unknown>>;
+
   setPage: Setter<string | undefined>;
   page: Accessor<string | undefined>;
 }) {
   const { navigate } = useSettingsNavigation();
-  const list = props.list();
 
   /**
    * Select first page on load
    */
   onMount(() => {
     if (!props.page()) {
-      props.setPage(list.entries[0].entries[0].id);
+      props.setPage(props.list().entries[0].entries[0].id);
     }
   });
 
   return (
-    <Base class="settings_sidebar">
+    <Base>
       <div use:invisibleScrollable>
-        <Content class="content">
+        <Content>
           <Column gap="lg">
-            {list.prepend}
-            <For each={list.entries}>
+            {props.list().prepend}
+            <For each={props.list().entries}>
               {(category) => (
                 <Show when={!category.hidden}>
                   <Column>
@@ -87,7 +87,7 @@ export function SettingsSidebar(props: {
                 </Show>
               )}
             </For>
-            {list.append}
+            {props.list().append}
           </Column>
         </Content>
       </div>
@@ -104,7 +104,6 @@ const Base = styled("div", {
     flex: "1 0 218px",
     paddingLeft: "8px",
     justifyContent: "flex-end",
-    height: "100%",
   },
 });
 

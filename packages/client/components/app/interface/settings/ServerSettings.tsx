@@ -24,7 +24,6 @@ import { EmojiList } from "./server/emojis/EmojiList";
 import { ListServerInvites } from "./server/invites/ListServerInvites";
 import { ServerRoleEditor } from "./server/roles/ServerRoleEditor";
 import { ServerRoleOverview } from "./server/roles/ServerRoleOverview";
-import { BackCard } from "./user/_AccountCard";
 
 const Config: SettingsConfiguration<Server> = {
   /**
@@ -90,13 +89,12 @@ const Config: SettingsConfiguration<Server> = {
    * Generate list of categories / entries for server settings
    * @returns List
    */
-  list(server, onClose) {
+  list(server) {
     const user = useUser();
     const { openModal } = useModals();
 
     return {
       context: server,
-      prepend: <BackCard onClose={onClose} />,
       entries: [
         {
           title: <TextWithEmoji content={server.name} />,

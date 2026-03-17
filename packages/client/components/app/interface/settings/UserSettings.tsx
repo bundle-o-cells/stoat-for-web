@@ -32,7 +32,7 @@ import { Feedback } from "./user/Feedback";
 import { LanguageSettings } from "./user/Language";
 import Native from "./user/Native";
 import { Sessions } from "./user/Sessions";
-import { AccountCard, BackCard } from "./user/_AccountCard";
+import { AccountCard } from "./user/_AccountCard";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBots, ViewBot } from "./user/bots";
 import { EditProfile } from "./user/profile";
@@ -104,7 +104,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
    * Generate list of categories / entries for client settings
    * @returns List
    */
-  list(_, onClose) {
+  list() {
     const { pop } = useModals();
     const { logout } = useClientLifecycle();
 
@@ -112,7 +112,6 @@ const Config: SettingsConfiguration<{ server: Server }> = {
       context: null!,
       prepend: (
         <Column gap="s">
-          <BackCard onClose={onClose} />
           <AccountCard />
           <div />
         </Column>

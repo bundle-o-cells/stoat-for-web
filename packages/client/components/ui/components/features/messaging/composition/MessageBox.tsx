@@ -95,9 +95,9 @@ interface Props {
 const Base = styled("div", {
   base: {
     flexGrow: 1,
-    minWidth: 0,
 
-    padding: "var(--gap-sm) var(--gap-md)",
+    paddingInlineEnd: "var(--gap-md)",
+    paddingBlock: "var(--gap-sm)",
     borderStartRadius: "var(--borderRadius-xl)",
 
     display: "flex",
@@ -141,9 +141,6 @@ const Blocked = styled(Row, {
     userSelect: "none",
     padding: "var(--gap-md)",
   },
-  variants: {
-    noPad: { true: { padding: 0 } },
-  },
 });
 
 /**
@@ -158,12 +155,16 @@ export const InlineIcon = styled("div", {
   },
   variants: {
     size: {
-      short: { width: "14px" },
-      normal: { width: "42px" },
+      short: {
+        width: "14px",
+      },
+      normal: {
+        width: "42px",
+      },
+      wide: {
+        width: "62px",
+      },
     },
-  },
-  defaultVariants: {
-    size: "normal",
   },
 });
 
@@ -188,7 +189,7 @@ export function MessageBox(props: Props) {
       <Base hasActionsAppend={props.hasActionsAppend}>
         <Switch fallback={props.actionsStart}>
           <Match when={!props.sendingAllowed}>
-            <InlineIcon>
+            <InlineIcon size="wide">
               <Blocked>
                 <BiRegularBlock size={24} />
               </Blocked>
@@ -213,7 +214,7 @@ export function MessageBox(props: Props) {
           }
         >
           <Match when={!props.sendingAllowed}>
-            <Blocked align noPad>
+            <Blocked align>
               <Trans>
                 You don't have permission to send messages in this channel.
               </Trans>

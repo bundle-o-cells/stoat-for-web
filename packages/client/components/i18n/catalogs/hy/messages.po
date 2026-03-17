@@ -400,7 +400,6 @@ msgstr "Անձնանշան"
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/auth/src/flows/FlowCheck.tsx
-#: components/app/interface/settings/user/_AccountCard.tsx
 msgid "Back"
 msgstr ""
 
@@ -1179,8 +1178,8 @@ msgid "Emoji Name"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-#~ msgid "Emoji Pack (affects your messages only)"
-#~ msgstr ""
+msgid "Emoji Pack (affects your messages only)"
+msgstr ""
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Emojis"
@@ -1458,8 +1457,8 @@ msgid "Instead of closing, Stoat will hide in your tray."
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-#~ msgid "Interface Font"
-#~ msgstr ""
+msgid "Interface Font"
+msgstr ""
 
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Invisible"
@@ -1800,8 +1799,8 @@ msgid "Monochrome"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
-#~ msgid "Monospace Font"
-#~ msgstr ""
+msgid "Monospace Font"
+msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "More Contrast"
@@ -2115,7 +2114,6 @@ msgstr ""
 msgid "Raid or spam attack"
 msgstr ""
 
-#: components/app/menus/MessageContextMenu.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "React"
 msgstr ""

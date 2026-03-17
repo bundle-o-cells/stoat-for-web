@@ -35,6 +35,12 @@ export function Tooltip(props: Props) {
   const [local, remote] = splitProps(props, ["children"]);
 
   return (
-    <div use:floating={{ tooltip: remote as never }}>{local.children}</div>
+    <div
+      use:floating={{
+        tooltip: remote as never,
+      }}
+    >
+      {local.children}
+    </div>
   );
 }

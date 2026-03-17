@@ -16,8 +16,8 @@ import {
   NonBreakingText,
   OverflowingText,
   Spacer,
-  typography,
   UserStatus,
+  typography,
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
@@ -28,7 +28,7 @@ import MdSettings from "@material-design-icons/svg/outlined/settings.svg?compone
 import MdKeep from "../../svg/keep.svg?component-solid";
 import { HeaderIcon } from "../common/CommonHeader";
 
-import { canIHasSidebar, SidebarState } from "./text/TextChannel";
+import { SidebarState } from "./text/TextChannel";
 
 interface Props {
   /**
@@ -60,8 +60,11 @@ export function ChannelHeader(props: Props) {
     if (!props.sidebarState) return null;
 
     const state = props.sidebarState();
-    if (state.state === "search") return state.query;
-    return "";
+    if (state.state === "search") {
+      return state.query;
+    } else {
+      return "";
+    }
   };
 
   return (
@@ -200,7 +203,7 @@ export function ChannelHeader(props: Props) {
         </IconButton>
       </Show>
 
-      <Show when={props.sidebarState && canIHasSidebar(props.channel)}>
+      <Show when={props.sidebarState && props.channel.type !== "SavedMessages"}>
         <IconButton
           onPress={() => {
             if (props.sidebarState!().state === "default") {

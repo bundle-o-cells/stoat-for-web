@@ -3,7 +3,6 @@ import { JSX, Show, splitProps } from "solid-js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { useState } from "@revolt/state";
 import { Ripple } from "./Ripple";
 import { Unreads } from "./Unreads";
 
@@ -39,22 +38,13 @@ export type Props = {
    * Hover actions
    */
   readonly actions?: JSX.Element;
-
-  readonly noDrawer?: boolean;
 };
 
 /**
  * Button intended for sidebar contexts
  */
-export function MenuButton(
-  props: Props &
-    JSX.HTMLAttributes<HTMLAnchorElement> &
-    JSX.HTMLAttributes<HTMLDivElement> & { href?: string },
-) {
-  const { appDrawer } = useState();
+export function MenuButton(props: Props & JSX.HTMLAttributes<HTMLDivElement>) {
   const [local, other] = splitProps(props, [
-    "onClick",
-    "noDrawer",
     "attention",
     "size",
     "icon",
@@ -63,15 +53,20 @@ export function MenuButton(
     "actions",
   ]);
 
-  function onClick(e: Event) {
-    if (!local.noDrawer) appDrawer()?.setShown(true);
-    // @ts-expect-error callable listener
-    if (local.onClick) local.onClick(e);
-  }
-
-  const cont = (
-    <>
+  return (
+    // TODO: port to panda-css to merge down components
+    <div
+      {...other}
+      classList={{
+        [base({
+          attention: local.attention,
+          size: local.size,
+        })]: true,
+      }}
+      // @codegen directives props=other include=floating
+    >
       <Ripple />
+      {/* <Base {...other} align> */}
       {local.icon}
       <Content>{local.children}</Content>
       <Show when={local.alert}>
@@ -88,43 +83,8 @@ export function MenuButton(
           {local.actions}
         </Actions>
       )}
-    </>
-  );
-
-  return (
-    // TODO: port to panda-css to merge down components
-    <Show
-      when={other.href}
-      fallback={
-        <div
-          {...other}
-          onClick={onClick}
-          classList={{
-            [base({
-              attention: local.attention,
-              size: local.size,
-            })]: true,
-          }}
-          // @codegen directives props=other include=floating
-        >
-          {cont}
-        </div>
-      }
-    >
-      <a
-        {...other}
-        onClick={onClick}
-        classList={{
-          [base({
-            attention: local.attention,
-            size: local.size,
-          })]: true,
-        }}
-        // @codegen directives props=other include=floating
-      >
-        {cont}
-      </a>
-    </Show>
+      {/* </Base> */}
+    </div>
   );
 }
 

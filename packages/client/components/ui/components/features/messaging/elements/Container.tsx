@@ -1,4 +1,4 @@
-import { Accessor, JSX, Match, Ref, Show, Switch } from "solid-js";
+import { JSX, Match, Show, Switch } from "solid-js";
 
 import { useLingui } from "@lingui-solid/solid/macro";
 import { Message } from "stoat.js";
@@ -13,8 +13,6 @@ import {
   Time,
 } from "@revolt/ui/components/utils";
 
-import { useState } from "@revolt/state";
-import { MediaPickerProps } from "../composition/picker/CompositionMediaPicker";
 import { MessageToolbar } from "./MessageToolbar";
 
 interface CommonProps {
@@ -103,10 +101,6 @@ type Props = CommonProps & {
    * Component to render message context menu
    */
   contextMenu?: () => JSX.Element;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref?: Ref<any>;
-  reactPicker?: Accessor<MediaPickerProps | undefined>;
 
   /**
    * Additional match cases for the inline-start information element
@@ -243,7 +237,6 @@ const Body = styled("div", {
     editing: {
       true: {
         flexGrow: 1,
-        overflow: "visible",
       },
     },
   },
@@ -314,12 +307,10 @@ const CompactInfo = styled(Row, {
  */
 export function MessageContainer(props: Props) {
   const { t } = useLingui();
-  const { isMobile } = useState();
 
   return (
     <div
       id={props.message?.id}
-      ref={props.ref}
       onMouseEnter={() => props.onHover && props.onHover(true)}
       onMouseLeave={() => props.onHover && props.onHover(false)}
       class={
@@ -335,17 +326,9 @@ export function MessageContainer(props: Props) {
       use:floating={{ contextMenu: props.contextMenu }}
     >
       <Show
-        when={
-          !isMobile &&
-          props.message &&
-          props.isLink !== true &&
-          props.isLink !== "hide"
-        }
+        when={props.message && props.isLink !== true && props.isLink !== "hide"}
       >
-        <MessageToolbar
-          message={props.message}
-          reactPicker={props.reactPicker}
-        />
+        <MessageToolbar message={props.message} />
       </Show>
 
       <Show when={props.isLink}>
@@ -364,7 +347,7 @@ export function MessageContainer(props: Props) {
                   use:floating={{
                     tooltip: {
                       placement: "top",
-                      content: () => (
+                      content: (
                         <>
                           {t`Sent`}{" "}
                           <Time
@@ -373,8 +356,7 @@ export function MessageContainer(props: Props) {
                             referenceTime={props._referenceTime}
                           />
                         </>
-                      ),
-                      aria: "",
+                      ) as string, // ignore aria requirement
                     },
                   }}
                 >
@@ -394,7 +376,7 @@ export function MessageContainer(props: Props) {
                 use:floating={{
                   tooltip: {
                     placement: "top",
-                    content: () => (
+                    content: (
                       <Column>
                         <span>
                           {t`Sent`}{" "}
@@ -415,8 +397,7 @@ export function MessageContainer(props: Props) {
                           </span>
                         </Show>
                       </Column>
-                    ),
-                    aria: "",
+                    ) as string, // ignore aria requirement
                   },
                 }}
               >
@@ -439,41 +420,39 @@ export function MessageContainer(props: Props) {
               <NonBreakingText>
                 <div class={infoText()}>
                   {props.info}
-                  <Show
-                    when={props.timestamp instanceof Date}
-                    fallback={props.timestamp as JSX.Element}
-                  >
-                    <span
-                      use:floating={{
-                        tooltip: {
-                          placement: "top",
-                          content: () => (
-                            <>
-                              {t`Sent`}{" "}
-                              <Time
-                                format="datetime"
-                                value={props.timestamp}
-                                referenceTime={props._referenceTime}
-                              />
-                            </>
-                          ),
-                          aria: "",
-                        },
-                      }}
-                    >
-                      <Time
-                        format="calendar"
-                        value={props.timestamp}
-                        referenceTime={props._referenceTime}
-                      />
-                    </span>
-                  </Show>
+                  <Switch fallback={props.timestamp as string}>
+                    <Match when={props.timestamp instanceof Date}>
+                      <span
+                        use:floating={{
+                          tooltip: {
+                            placement: "top",
+                            content: (
+                              <>
+                                {t`Sent`}{" "}
+                                <Time
+                                  format="datetime"
+                                  value={props.timestamp}
+                                  referenceTime={props._referenceTime}
+                                />
+                              </>
+                            ) as string, // ignore aria requirement
+                          },
+                        }}
+                      >
+                        <Time
+                          format="calendar"
+                          value={props.timestamp}
+                          referenceTime={props._referenceTime}
+                        />
+                      </span>
+                    </Match>
+                  </Switch>
                   <Show when={props.edited}>
                     <span
                       use:floating={{
                         tooltip: {
                           placement: "top",
-                          content: () => (
+                          content: (
                             <>
                               {t`Edited`}{" "}
                               <Time
@@ -482,8 +461,7 @@ export function MessageContainer(props: Props) {
                                 referenceTime={props._referenceTime}
                               />
                             </>
-                          ),
-                          aria: "",
+                          ) as string, // ignore aria requirement
                         },
                       }}
                     >

@@ -31,7 +31,6 @@ import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
 
-import { Channel } from "stoat.js";
 import { MessageComposition } from "./Composition";
 import { MemberSidebar } from "./MemberSidebar";
 import { TextSearchSidebar } from "./TextSearchSidebar";
@@ -50,10 +49,6 @@ export type SidebarState =
   | {
       state: "default";
     };
-
-export function canIHasSidebar(ch: Channel) {
-  return !["SavedMessages", "DirectMessage"].includes(ch.type);
-}
 
 /**
  * Channel component
@@ -222,7 +217,7 @@ export function TextChannel(props: ChannelPageProps) {
               LAYOUT_SECTIONS.MEMBER_SIDEBAR,
               true,
             ) &&
-              canIHasSidebar(props.channel)) ||
+              props.channel.type !== "SavedMessages") ||
             sidebarState().state !== "default"
           }
         >

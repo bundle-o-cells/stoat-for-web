@@ -1,4 +1,4 @@
-import { Accessor, Show } from "solid-js";
+import { Show } from "solid-js";
 
 import { Message } from "stoat.js";
 import { cva } from "styled-system/css";
@@ -17,16 +17,13 @@ import MdEmojiEmotions from "@material-design-icons/svg/outlined/emoji_emotions.
 import MdMoreVert from "@material-design-icons/svg/outlined/more_vert.svg?component-solid";
 import MdReply from "@material-design-icons/svg/outlined/reply.svg?component-solid";
 
-import { MediaPickerProps } from "../composition/picker/CompositionMediaPicker";
+import { startsWithPackPUA } from "@revolt/markdown/emoji/UnicodeEmoji";
+import { CompositionMediaPicker } from "../composition";
 
-export function MessageToolbar(props: {
-  message?: Message;
-  reactPicker?: Accessor<MediaPickerProps | undefined>;
-}) {
+export function MessageToolbar(props: { message?: Message }) {
   const user = useUser();
   const state = useState();
   const { openModal } = useModals();
-  let reactRef;
 
   // todo: a11y for buttons; tabindex
 
@@ -56,14 +53,34 @@ export function MessageToolbar(props: {
         </div>
       </Show>
       <Show when={props.message?.channel?.havePermission("React")}>
-        <div
-          ref={reactRef}
-          class={tool()}
-          onClick={(e) => props.reactPicker?.()?.onClickEmoji(e, reactRef)}
+        <CompositionMediaPicker
+          onMessage={(content) =>
+            props.message?.channel?.sendMessage({
+              content,
+              replies: [{ id: props.message.id, mention: true }],
+            })
+          }
+          onTextReplacement={(emoji) =>
+            props.message!.react(
+              emoji.startsWith(":")
+                ? emoji.slice(1, emoji.length - 1)
+                : startsWithPackPUA(emoji)
+                  ? emoji.slice(1)
+                  : emoji,
+            )
+          }
         >
-          <Ripple />
-          <MdEmojiEmotions {...iconSize(20)} />
-        </div>
+          {(triggerProps) => (
+            <div
+              ref={triggerProps.ref}
+              class={tool()}
+              onClick={triggerProps.onClickEmoji}
+            >
+              <Ripple />
+              <MdEmojiEmotions {...iconSize(20)} />
+            </div>
+          )}
+        </CompositionMediaPicker>
       </Show>
       <Show when={props.message?.author?.self}>
         <div
@@ -88,12 +105,7 @@ export function MessageToolbar(props: {
       <div
         class={tool()}
         use:floating={{
-          contextMenu: () => (
-            <MessageContextMenu
-              message={props.message!}
-              reactPicker={props.reactPicker}
-            />
-          ),
+          contextMenu: () => <MessageContextMenu message={props.message!} />,
           contextMenuHandler: "click",
         }}
       >

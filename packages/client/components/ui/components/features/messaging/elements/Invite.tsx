@@ -97,7 +97,7 @@ const Base = styled("div", {
     display: "flex",
     alignItems: "center",
 
-    maxWidth: "320px",
+    width: "320px",
     height: "64px",
     gap: "var(--gap-md)",
     padding: "var(--gap-md)",
