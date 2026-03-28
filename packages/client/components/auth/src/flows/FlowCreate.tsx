@@ -49,7 +49,7 @@ export default function FlowCreate() {
 
   const isInviteOnly = () => {
     const client = getClient();
-    if (client.configured()) {
+    if (client.configured) {
       return client.configuration?.features.invite_only;
     }
     return false;
